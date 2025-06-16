@@ -1,0 +1,180 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+"Plugin 'Yggdroot/indentLine'
+"Plugin 'aradzu10/a.vim'
+"Plugin 'aradzu10/fzf.vim'
+"Plugin 'aradzu10/vim-signify'
+Plugin 'bfrg/vim-cpp-modern'
+"Plugin 'easymotion/vim-easymotion'
+Plugin 'ervandew/supertab'
+"Plugin 'frazrepo/vim-rainbow'
+Plugin 'junegunn/fzf'
+Plugin 'kshenoy/vim-signature'
+"Plugin 'ludovicchabant/vim-gutentags'
+"Plugin 'lygaret/autohighlight.vim'
+"Plugin 'machakann/vim-highlightedyank'
+"Plugin 'majutsushi/tagbar'
+Plugin 'morhetz/gruvbox'
+Plugin 'preservim/nerdcommenter'
+Plugin 'rhysd/clever-f.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-scripts/h2cppx'
+Plugin 'dense-analysis/ale'
+"Plugin 'Shougo/deoplete.nvim'
+"Plugin 'roxma/nvim-yarp'
+"Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+
+endif
+let g:deoplete#enable_at_startup = 1
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" ============ General Vim Settings ============
+
+" Make vim show the background properly in tmux
+set t_ut=
+
+" ------------     Vim Settings     ------------
+
+" Better searching
+set hlsearch
+set incsearch
+
+" Show matching brackets
+set showmatch
+set matchpairs+=<:>
+
+" Disable bell sound
+set visualbell
+
+" Hide closed buffers
+set hidden
+
+" Better command completion
+set wildmenu
+
+" Show line numbers
+set number
+
+" Better searchin - ignore case in searches unless there is an upper char
+set ignorecase
+set smartcase
+
+" mark spell errors
+set spell
+
+" show number of occurense while searching at bottom right corner
+set shortmess-=S
+
+" Make backspace work properly in insert mode
+set backspace=indent,eol,start
+
+" Better line joining for comments
+set formatoptions+=j
+
+" Tab options
+set expandtab
+set smarttab
+set shiftwidth=4
+set tabstop=4
+set autoindent
+set smartindent
+
+" Open new split panes to right and bottom
+set splitbelow
+set splitright
+
+" ------------ Vim Keybinding Settings ------------
+
+" Set <leader> to space, it's much easier to mash this way
+let mapleader=" "
+
+" Y to copy until end of line (like excpected from C, D)
+nmap Y y$
+
+" Jump end and home like shell
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+noremap <C-a> ^
+noremap <C-e> $
+
+" Delete/Change without override paste register
+nnoremap d "_d
+nnoremap c "_c
+nnoremap D "_D
+nnoremap C "_C
+nnoremap x "_x
+nnoremap X "_X
+nnoremap s "_s
+nnoremap S "_S
+" Delete line with paste
+nnoremap <leader>d dd
+
+" disable open history menu
+vmap q: <Nop>
+nmap q: <Nop>
+
+" exit insert mode
+"inoremap jk <Esc>
+vnoremap <leader>jk <Esc>
+
+" New Tab settings
+noremap <C-t> :tabe<space>
+noremap <C-x> :tabclose<CR>
+noremap <C-x> :tabp<CR>
+noremap <C-c> :tabn<CR>
+
+" zoom/out zoom pane
+" noremap Zz <c-w>_ \| <c-w>\|
+" noremap Zo <c-w>=
+
+" Toggle stuff
+nnoremap <leader><insert> :set paste! paste?<CR>
+
+" Stop highlighting
+nnoremap <leader>h :nohlsearch<CR>
+
+let g:ale_fixers = {
+\ '*' : ['remove_trailing_lines','trim_whitespace'],
+\ 'python' : ['ruff', 'ruff_format'],
+\ 'c' : ['clang-tidy', 'clang-format'],
+\}
+
+" Search cword and not jump
+"noremap * *``
+let g:ale_completion_enabled=1
+
+
+
+nnoremap ,f :Files
+"nnoremap ,g :GitFiles
+nnoremap ,l :Lines
+
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+inoremap <expr> <C-@> <Plug>(asyncomplete_force_refresh)
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'jedi-language-server',
+    \ 'cmd': {server_info->['pylsp']},
+    \ 'allowlist': ['python'],
+    \ })
+
+" IdeaVim cannot parse this line:
+exe "source ~/.vim/extrarc.vim"

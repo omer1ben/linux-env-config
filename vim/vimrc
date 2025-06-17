@@ -162,7 +162,7 @@ let g:ale_completion_enabled=1
 
 
 nnoremap ,f :Files
-"nnoremap ,g :GitFiles
+nnoremap ,g :GitFiles
 nnoremap ,l :Lines
 
 

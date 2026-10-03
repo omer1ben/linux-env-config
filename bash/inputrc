@@ -1,0 +1,27 @@
+# Readline config — used by bash and anything else readline-based
+# (python REPL, psql, ...).
+
+# Up/Down: search history for commands starting with what you already typed.
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Alt+Left/Right: move by word (both encodings terminals commonly send).
+"\e[1;3D": backward-word
+"\e[1;3C": forward-word
+"\e\e[D": backward-word
+"\e\e[C": forward-word
+
+# Ctrl+Left/Right: move by word too.
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+
+# Home / End (all common encodings, with and without tmux).
+"\e[H": beginning-of-line
+"\e[F": end-of-line
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+
+# Forward-delete key.
+"\e[3~": delete-char

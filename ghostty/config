@@ -1,0 +1,5 @@
+# Send the Option key as Alt (Esc-prefixed sequences) so Alt+Enter,
+# Alt+arrows etc. reach tmux/bash/nvim/Claude Code.
+# Use "left" instead of "true" if you still want right-Option for
+# special characters (€, ±, ...).
+macos-option-as-alt = true
